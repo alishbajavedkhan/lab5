@@ -20,6 +20,17 @@
         android:layout_height="wrap_content"
         android:text="Province"
         android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDeleteCity"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/buttonDeleteCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Del"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@android:color/holo_red_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

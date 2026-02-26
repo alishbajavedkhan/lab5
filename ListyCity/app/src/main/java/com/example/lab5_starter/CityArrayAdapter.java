@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,13 +14,19 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 public class CityArrayAdapter extends ArrayAdapter<City> {
+    public interface OnCityDeleteListener {
+        void onDelete(City city);
+    }
+
     private ArrayList<City> cities;
     private Context context;
+    private OnCityDeleteListener deleteListener;
 
-    public CityArrayAdapter(Context context, ArrayList<City> cities){
+    public CityArrayAdapter(Context context, ArrayList<City> cities, OnCityDeleteListener deleteListener){
         super(context, 0, cities);
         this.cities = cities;
         this.context = context;
+        this.deleteListener = deleteListener;
     }
 
     @NonNull
@@ -32,9 +39,16 @@ public class CityArrayAdapter extends ArrayAdapter<City> {
         City city = cities.get(position);
         TextView movieName = view.findViewById(R.id.textCityName);
         TextView movieYear = view.findViewById(R.id.textCityProvince);
+        Button deleteButton = view.findViewById(R.id.buttonDeleteCity);
 
         movieName.setText(city.getName());
         movieYear.setText(city.getProvince());
+
+        deleteButton.setOnClickListener(v -> {
+            if (deleteListener != null) {
+                deleteListener.onDelete(city);
+            }
+        });
 
         return view;
     }
